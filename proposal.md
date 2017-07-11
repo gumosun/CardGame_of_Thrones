@@ -8,7 +8,7 @@ CardGame of Thrones is a simple card game of fantastic TV show "Game of Thrones"
 
 ### Wireframe
 
-(Your wireframes go here. Preferably two or more)
+![wireframe]
 
 ### Initial thoughts on game structure
 
