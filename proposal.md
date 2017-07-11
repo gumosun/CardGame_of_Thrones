@@ -1,10 +1,10 @@
-*** Name / Date ***
+*** Hao Sun / July 11th 2017
 
-[Name of Game] Proposal
+[CardGame of Thrones] Proposal
 
-What is [name of game]?
+What is [CardGame of Thrones]?
 
-(Brief description of the game, why you're choosing to make it)
+CardGame of Thrones is a simple card game of fantastic TV show "Game of Thrones"
 
 Wireframe
 
@@ -12,7 +12,7 @@ Wireframe
 
 Initial thoughts on game structure
 
-(Write out what challenges you expect to encounter, or ideas you want to come up with)
+It's challenging to build up the AI 
 
 Phases of Completion
 
