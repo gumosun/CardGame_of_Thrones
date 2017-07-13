@@ -7,6 +7,11 @@ body {
   width:100%;
 }
 
+container {
+  width: 700px;
+  height:100%;
+}
+
 .mainDiv {
   font-family: 'UnifrakturMaguntia', cursive;
   font-size: 70px;
@@ -76,28 +81,32 @@ body {
 
 #row1 {
   display: inline-block;
-  width: 100%
-  height: 350px;
+  height: 400px;
+  width: 850px;
+  margin: 0px 100px;
 }
 
 #row2 {
   display: inline-block;
-  width:100%
-  height:350px;
+  height: 400px;
+  width: 850px;
+  margin: 0px 100px;
 }
 
 #row1 div {
-  height: 300px;
-  width:180px;
-  border: 1px solid grey;
+  height: 330px;
+  width: 213px;
+  border: 5px solid grey;
   float: left;
+  margin: 5px 25px;
 }
 
-##row2 div {
-  height: 300px;
-  width:180px;
-  border: 1px solid grey;
+#row2 div {
+  height: 330px;
+  width: 213px;
+  border: 5px solid grey;
   float: left;
+  margin: 5px 25px;
 }
 
 

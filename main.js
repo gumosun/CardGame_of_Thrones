@@ -13,6 +13,9 @@ var cerseiLannister = new card("lannister", "Cersei Lannister", 40, 70);
 var jaimeLannister = new card("lannister", "Jaime Lannister", 75, 85);
 var tyrionLannister = new card("lannister", "Tyrion Lannister", 50, 50);
 
+var starkFamily =[jonSnow, aryaStark, sansaStark];
+var lannisterFamily =[cerseiLannister, jaimeLannister, tyrionLannister];
+
 var player = 0;
 
 // To load and start the game
@@ -35,7 +38,7 @@ $('#houseStark').click(function() {
   $('.familyDiv').remove();
   $('#mainTitle').remove();
   $('.mainDiv').remove();
-  $('body').css({'background-image': "url(./images/map.jpg)", 'background-size': "cover"});
+  $('body').css({'background-image': "url(./images/map.jpg)", 'background-size': "cover", 'height': "100%"});
   player = 1;
   deployCards(player);
 });
@@ -43,7 +46,7 @@ $('#houseLannister').click(function() {
   $('.familyDiv').remove();
   $('#mainTitle').remove();
   $('.mainDiv').remove();
-  $('body').css('background-image', "url(./images/map.jpg)");
+  $('body').css({'background-image': "url(./images/map.jpg)", 'background-size': "cover", 'height': "100%"});
   player = 2;
   deployCards(player);
 });
@@ -53,31 +56,25 @@ $('#houseLannister').click(function() {
 function deployCards(player){
   $('<div id="row1">').appendTo('container');
   $('<div id="row2">').appendTo('container');
-    for (let i=0 ; i<3; i++) {
-    $(`<div id="${i}">`).appendTo('#row1');
-    }
-    for (let i=0 ; i<3; i++) {
-    $(`<div id="${i}">`).appendTo('#row2');
-    }
    if (player == 1) {
       $('#row2').addClass('houseStark');
       $('#row1').addClass('houseLannister');
+       for (let i=0 ; i<3; i++) {
+        $(`<div id="${starkFamily[i].name}">`).appendTo('#row1');
+      }
+       for (let i=0 ; i<3; i++) {
+        $(`<div id="${lannisterFamily[i].name}">`).appendTo('#row2');
+    }
    } else {
       $('#row1').addClass('houseStark');
       $('#row2').addClass('houseLannister');
+      for (let i=0 ; i<3; i++) {
+        $(`<div id="${starkFamily[i].name}">`).appendTo('#row2');
+      }
+       for (let i=0 ; i<3; i++) {
+        $(`<div id="${lannisterFamily[i].name}">`).appendTo('#row1');
+    }
+   }
    }
 
-  // if (player == 1){
 
-  // } else {
-
-  // }
-}
-
-
-//
-//
-
-// $("#removebtn1234").click(function(){
-//     $(this).remove();
-// });
