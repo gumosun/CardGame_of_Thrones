@@ -1,0 +1,79 @@
+body {
+  text-align: center;
+  background-image: url(./images/main.jpg);
+  font-family: 'UnifrakturMaguntia', cursive;
+  height:100%;
+}
+
+.mainDiv {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 70px;
+  color:gold;
+  width:100%;
+  height:90%;
+  display:inline-block;
+  align-items: center;
+  justify-content: center;
+  margin:100px auto;
+  animation: fadeIn 2s linear;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#startButton {
+  width:300px;
+  height:100px;
+  background-color: black;
+  color:white;
+  font-family: 'Bungee', cursive;
+  padding:0px;
+  font-size:36px;
+  animation: fadeIn 4s linear;
+  border-radius: 20px;
+}
+
+.familyDiv {
+  height:433px;
+  width:280px;
+  display:inline-block;
+}
+
+#houseStark:hover, #houseLanister:hover {
+  border: 4px solid #D4AF37;
+}
+
+#houseStark {
+  margin:5px 25px;
+  background-image: url(./images/houseStark.jpg);
+}
+
+#houseLanister {
+  margin:5px 25px;
+  background-image: url(./images/houseLanister.jpg);
+}
+
+
+
+font-family: 'UnifrakturMaguntia', cursive;
+font-family: 'Chicle', cursive;
+font-family: 'Bungee', cursive;
