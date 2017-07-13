@@ -1,8 +1,10 @@
 body {
   text-align: center;
   background-image: url(./images/main.jpg);
+  background-size: cover;
   font-family: 'UnifrakturMaguntia', cursive;
   height:100%;
+  width:100%;
 }
 
 .mainDiv {
@@ -58,7 +60,7 @@ body {
   display:inline-block;
 }
 
-#houseStark:hover, #houseLanister:hover {
+#houseStark:hover, #houseLannister:hover {
   border: 4px solid #D4AF37;
 }
 
@@ -67,9 +69,35 @@ body {
   background-image: url(./images/houseStark.jpg);
 }
 
-#houseLanister {
+#houseLannister {
   margin:5px 25px;
   background-image: url(./images/houseLanister.jpg);
+}
+
+#row1 {
+  display: inline-block;
+  width: 100%
+  height: 350px;
+}
+
+#row2 {
+  display: inline-block;
+  width:100%
+  height:350px;
+}
+
+#row1 div {
+  height: 300px;
+  width:180px;
+  border: 1px solid grey;
+  float: left;
+}
+
+##row2 div {
+  height: 300px;
+  width:180px;
+  border: 1px solid grey;
+  float: left;
 }
 
 
