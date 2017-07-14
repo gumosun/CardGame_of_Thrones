@@ -132,9 +132,15 @@ container {
 }
 
 #row2 div:hover {
-  border: 8px solid #D4AF37;
+  border: 5px solid #D4AF37;
 }
 
+#erase {
+  height:200px;
+  width:200px;
+  background-image: url(./images/erase.png);
+  margin: 50px auto;
+}
 
 
 font-family: 'UnifrakturMaguntia', cursive;

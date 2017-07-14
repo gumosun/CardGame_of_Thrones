@@ -65,19 +65,19 @@ function deployCards(player) {
       $('#row2').addClass('houseStark');
       $('#row1').addClass('houseLannister');
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i}>`).appendTo('#row2');
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row2');
       }
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i}>`).appendTo('#row1');
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row1');
     }
    } else {
       $('#row1').addClass('houseStark');
       $('#row2').addClass('houseLannister');
       for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i}>`).appendTo('#row1');
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row1');
       }
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i}>`).appendTo('#row2');
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row2');
     }
    }
       selectCard(player);
@@ -155,12 +155,28 @@ function cpuStarkRandom(){
 
 function cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard) {
   if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
-    $(playerCard).remove();
-    $(cpuCard).remove();
+      $(playerCard).data('die', true);
+      $(cpuCard).data('die', true);
+      console.log(playerCard);
+      console.log(cpuCard);
+      $('<div id="erase">').appendTo(playerCard);
+      $('<div id="erase">').appendTo(cpuCard);
+      $(playerCard).css('border', "0");
+      $('#erase').css('border', "0");
+      playerCard.dataset.die = true;
+      cpuCard.dataset.die = true;
   } else if (playerCardPower >= cpuCardDef) {
-      $(cpuCard).remove();
+      $('<div id="erase">').appendTo(cpuCard);
+      cpuCard.dataset.die = true;
+      console.log(playerCard);
+      console.log(cpuCard);
   } else if (cpuCardPower >= playerCardDef) {
-      $(playerCard).remove();
+      $('<div id="erase">').appendTo(playerCard);
+      $(playerCard).css('border', "0");
+      $('#erase').css('border', "0");
+      playerCard.dataset.die = true;
+       console.log(playerCard);
+      console.log(cpuCard);
   } else {
       alert("Draw! Select another game to combat");
   }
