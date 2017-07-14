@@ -20,6 +20,8 @@ var playerCardPower = 0;
 var playerCardDef = 0;
 var cpuCardPower = 0;
 var cpuCardDef = 0;
+var cpuCard;
+var playerCard;
 
 // To load and start the game
 $('#startButton').click(function() {
@@ -86,33 +88,45 @@ function selectCard(player) {
   $(`.0`).click(function() {
     playerCardPower = starkFamily[0].power;
     playerCardDef = starkFamily[0].def;
+    playerCard = $('#row2 div')[0];
     cpuLannisterRandom()
+    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
   $(`.1`).click(function() {
     playerCardPower = starkFamily[1].power;
     playerCardDef = starkFamily[1].def;
+    playerCard = $('#row2 div')[1];
     cpuLannisterRandom()
+    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
   $(`.2`).click(function() {
      playerCardPower = starkFamily[2].power;
      playerCardDef = starkFamily[2].def;
+     playerCard = $('#row2 div')[2];
      cpuLannisterRandom()
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
  } else {
   $(`.0`).click(function() {
      playerCardPower = lannisterFamily[0].power;
      playerCardDef = lannisterFamily[0].def;
+     playerCard = $('#row2 div')[0];
      cpuStarkRandom()
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
    $(`.1`).click(function() {
      playerCardPower = lannisterFamily[1].power;
      playerCardDef = lannisterFamily[1].def;
+     playerCard = $('#row2 div')[1];
      cpuStarkRandom()
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
     $(`.2`).click(function() {
      playerCardPower = lannisterFamily[2].power;
      playerCardDef = lannisterFamily[2].def;
+     playerCard = $('#row2 div')[2];
      cpuStarkRandom()
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
 }
 }
@@ -122,6 +136,8 @@ function cpuLannisterRandom(){
   var rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
+  cpuCard = $('#row1 div')[rand];
+  $(cpuCard).css('border', "10px solid red");
   cpuCardPower = lannisterFamily[rand].power;
   cpuCardDef = lannisterFamily[rand].def;
 }
@@ -131,7 +147,22 @@ function cpuStarkRandom(){
   var rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
+  cpuCard = $('#row1 div')[rand];
+  $(cpuCard).css('border', "10px solid red");
   cpuCardPower = starkFamily[rand].power;
   cpuCardDef = starkFamily[rand].def;
+}
+
+function cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard) {
+  if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
+    $(playerCard).remove();
+    $(cpuCard).remove();
+  } else if (playerCardPower >= cpuCardDef) {
+      $(cpuCard).remove();
+  } else if (cpuCardPower >= playerCardDef) {
+      $(playerCard).remove();
+  } else {
+      alert("Draw! Select another game to combat");
+  }
 }
 
