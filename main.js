@@ -86,45 +86,63 @@ function deployCards(player) {
 function selectCard(player) {
   if (player == 1){
   $(`.0`).click(function() {
+    $('#row1 div').css('border', "0");
     playerCardPower = starkFamily[0].power;
     playerCardDef = starkFamily[0].def;
     playerCard = $('#row2 div')[0];
+    console.log(playerCardPower);
+    console.log(playerCardDef);
     cpuLannisterRandom()
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
   $(`.1`).click(function() {
+    $('#row1 div').css('border', "0");
     playerCardPower = starkFamily[1].power;
     playerCardDef = starkFamily[1].def;
     playerCard = $('#row2 div')[1];
+    console.log(playerCardPower);
+    console.log(playerCardDef);
     cpuLannisterRandom()
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
   $(`.2`).click(function() {
+    $('#row1 div').css('border', "0");
      playerCardPower = starkFamily[2].power;
      playerCardDef = starkFamily[2].def;
      playerCard = $('#row2 div')[2];
+     console.log(playerCardPower);
+     console.log(playerCardDef);
      cpuLannisterRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
  } else {
   $(`.0`).click(function() {
+    $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[0].power;
      playerCardDef = lannisterFamily[0].def;
      playerCard = $('#row2 div')[0];
+     console.log(playerCardPower);
+     console.log(playerCardDef);
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
    $(`.1`).click(function() {
+    $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[1].power;
      playerCardDef = lannisterFamily[1].def;
      playerCard = $('#row2 div')[1];
+     console.log(playerCardPower);
+     console.log(playerCardDef);
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
     $(`.2`).click(function() {
+    $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[2].power;
      playerCardDef = lannisterFamily[2].def;
      playerCard = $('#row2 div')[2];
+     console.log(playerCardPower);
+     console.log(playerCardDef);
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
   })
@@ -140,6 +158,8 @@ function cpuLannisterRandom(){
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = lannisterFamily[rand].power;
   cpuCardDef = lannisterFamily[rand].def;
+  console.log(cpuCardPower);
+  console.log(cpuCardDef);
 }
 
 function cpuStarkRandom(){
@@ -151,32 +171,31 @@ function cpuStarkRandom(){
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = starkFamily[rand].power;
   cpuCardDef = starkFamily[rand].def;
+  console.log(cpuCardPower);
+  console.log(cpuCardDef);
 }
 
 function cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard) {
   if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
-      $(playerCard).data('die', true);
-      $(cpuCard).data('die', true);
-      console.log(playerCard);
-      console.log(cpuCard);
-      $('<div id="erase">').appendTo(playerCard);
-      $('<div id="erase">').appendTo(cpuCard);
-      $(playerCard).css('border', "0");
-      $('#erase').css('border', "0");
+      $('<img src="./images/erase.png">').appendTo(playerCard);
+      $('<img src="./images/erase.png">').appendTo(cpuCard);
+      console.log('run through here');
       playerCard.dataset.die = true;
       cpuCard.dataset.die = true;
+      $(playerCard).css('border', "0");
   } else if (playerCardPower >= cpuCardDef) {
-      $('<div id="erase">').appendTo(cpuCard);
+      $('<img src="./images/erase.png">').appendTo(cpuCard);
       cpuCard.dataset.die = true;
       console.log(playerCard);
-      console.log(cpuCard);
+      console.log(cpuCard)
+      console.log('run through here');
   } else if (cpuCardPower >= playerCardDef) {
-      $('<div id="erase">').appendTo(playerCard);
+      $('<img src="./images/erase.png">').appendTo(playerCard);
       $(playerCard).css('border', "0");
-      $('#erase').css('border', "0");
       playerCard.dataset.die = true;
-       console.log(playerCard);
+      console.log(playerCard);
       console.log(cpuCard);
+      console.log('run through here');
   } else {
       alert("Draw! Select another game to combat");
   }

@@ -136,10 +136,10 @@ container {
 }
 
 #erase {
-  height:200px;
-  width:200px;
+  height:50%;
+  width:50%;
   background-image: url(./images/erase.png);
-  margin: 50px auto;
+  background-size: contain;
 }
 
 
