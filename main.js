@@ -9,7 +9,7 @@ function card(family, name, power, def, dead) {
 
 var jonSnow = new card("stark", "JonSnow", 80, 75, false);
 var aryaStark = new card("stark", "AryaStark", 85, 40, false);
-var sansaStark = new card("stark", "SansaStark", 50, 40, false);
+var sansaStark = new card("stark", "SansaStark", 50, 45, false);
 var cerseiLannister = new card("lannister", "CerseiLannister", 40, 70, false);
 var jaimeLannister = new card("lannister", "JaimeLannister", 75, 85, false);
 var tyrionLannister = new card("lannister", "TyrionLannister", 50, 50, false);
@@ -24,10 +24,15 @@ var cpuCardPower = 0;
 var cpuCardDef = 0;
 var cpuCard;
 var playerCard;
+var selection =0;
 var rand = 0;
 var cpuDeletedCard1;
 var cpuDeletedCard2;
 var cpuDeletedCard3;
+var playerDeletedCard1;
+var playerDeletedCard2;
+var playerDeletedCard3;
+
 
 
 // To load and start the game
@@ -97,6 +102,7 @@ function selectCard(player) {
     playerCardPower = starkFamily[0].power;
     playerCardDef = starkFamily[0].def;
     playerCard = $('#row2 div')[0];
+    selection = 0;
     console.log("cpuDeletedCard1 is" + cpuDeletedCard1 + "cpuDeletedCard2 is" + cpuDeletedCard2 );
     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef,
@@ -107,6 +113,7 @@ function selectCard(player) {
     playerCardPower = starkFamily[1].power;
     playerCardDef = starkFamily[1].def;
     playerCard = $('#row2 div')[1];
+    selection = 1;
     console.log(playerCardPower);
     console.log(playerCardDef);
     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
@@ -118,6 +125,7 @@ function selectCard(player) {
      playerCardPower = starkFamily[2].power;
      playerCardDef = starkFamily[2].def;
      playerCard = $('#row2 div')[2];
+     selection = 2;
      console.log(playerCardPower);
      console.log(playerCardDef);
      cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
@@ -130,6 +138,7 @@ function selectCard(player) {
      playerCardPower = lannisterFamily[0].power;
      playerCardDef = lannisterFamily[0].def;
      playerCard = $('#row2 div')[0];
+     selection = 0;
      console.log(playerCardPower);
      console.log(playerCardDef);
      cpuStarkRandom()
@@ -140,9 +149,10 @@ function selectCard(player) {
      playerCardPower = lannisterFamily[1].power;
      playerCardDef = lannisterFamily[1].def;
      playerCard = $('#row2 div')[1];
+     selection = 1;
      console.log(playerCardPower);
      console.log(playerCardDef);
-     cpuStarkRandom(cpuDeletedCard)
+     cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
     $(`.2`).click(function() {
@@ -150,9 +160,10 @@ function selectCard(player) {
      playerCardPower = lannisterFamily[2].power;
      playerCardDef = lannisterFamily[2].def;
      playerCard = $('#row2 div')[2];
+     selection = 2;
      console.log(playerCardPower);
      console.log(playerCardDef);
-     cpuStarkRandom(cpuDeletedCard)
+     cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
 }
@@ -189,6 +200,16 @@ function cpuStarkRandom(){
   rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
+  if (rand == 0 && cpuDeletedCard1 == 1){
+     console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  } else if (rand == 1 && cpuDeletedCard2 == 1){
+    console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  } else if (rand == 2 && cpuDeletedCard3 == 1){
+    console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  }
   cpuCard = $('#row1 div')[rand];
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = starkFamily[rand].power;
@@ -199,46 +220,57 @@ function cpuStarkRandom(){
 
 function cardComparing() {
   if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
-      $('<img src="./images/erase.png">').appendTo(playerCard);
+      $('<img src="./images/erase.png">').appendTo(playerCard); //add X image to lost cards
       $('<img src="./images/erase.png">').appendTo(cpuCard);
-      $(playerCard).css('border', "0");
-      console.log("rand is" + rand);
+      $(playerCard).css('border', "0");  // deleted the hover effect from card
       if (rand == 0){
         cpuDeletedCard1 = 1
-        console.log("cpuDeletedCard1 is" + cpuDeletedCard1)
-
       } else if (rand == 1){
         cpuDeletedCard2 = 1;
-        console.log("cpuDeletedCard2 is" + cpuDeletedCard2)
-
       }else {
         cpuDeletedCard3 = 1;
-        console.log("cpuDeletedCard3 is" + cpuDeletedCard3)
-
+      }
+      if (selection == 0){
+        playerDeletedCard1 = 1;
+      } else if (selection ==1){
+        playerDeletedCard2 = 1;
+      } else {
+        playerDeletedCard3 = 1;
       }
   } else if (playerCardPower >= cpuCardDef) {
       $('<img src="./images/erase.png">').appendTo(cpuCard);
        if (rand == 0){
         cpuDeletedCard1 = 1
-        console.log("cpuDeletedCard1 is" + cpuDeletedCard1)
-
       } else if (rand == 1){
         cpuDeletedCard2 = 1;
-        console.log("cpuDeletedCard2 is" + cpuDeletedCard2)
-
       }else {
         cpuDeletedCard3 = 1;
-        console.log("cpuDeletedCard3 is" + cpuDeletedCard3)
-
       }
-        console.log("rand is" + rand);
   } else if (cpuCardPower >= playerCardDef) {
       $('<img src="./images/erase.png">').appendTo(playerCard);
       $(playerCard).css('border', "0");
+        if (selection == 0){
+        playerDeletedCard1 = 1;
+      } else if (selection ==1){
+        playerDeletedCard2 = 1;
+      } else {
+        playerDeletedCard3 = 1;
+      }
       console.log(playerCard);
       console.log(cpuCard);
   } else {
-      alert("Draw! Select another game to combat");
+      alert("Draw! Select another card to combat");
+  }
+  winCheck();
+}
+
+function winCheck() {
+  if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1){
+    alert("Congradulation!! Your family win the thrones\nRematch?");
+    window.location.reload(true);
+  } else if (playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1){
+    alert("Your family lost this battle\nRematch?" );
+    window.location.reload(true);
   }
 }
 
