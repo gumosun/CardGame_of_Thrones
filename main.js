@@ -57,6 +57,9 @@ $('#houseStark').click(function() {
   $('.mainDiv').remove();
   $('body').css({'background-image': "url(./images/map.jpg)", 'background-size': "cover", 'height': "100%"});
   player = 1;
+  $('<div id="banner">Ready... \nFight!<div>').appendTo('container');
+  var bannerText = document.getElementById('banner');
+  window.setTimeout(function(){bannerText.innerHTML = ""}, 1500);
   deployCards(player);
 });
 $('#houseLannister').click(function() {
@@ -65,12 +68,16 @@ $('#houseLannister').click(function() {
   $('.mainDiv').remove();
   $('body').css({'background-image': "url(./images/map.jpg)", 'background-size': "cover", 'height': "100%"});
   player = 2;
+  $('<div id="banner">Ready... \nFight!<div>').appendTo('container');
+  var bannerText = document.getElementById('banner');
+  window.setTimeout(function(){bannerText.innerHTML = ""}, 1500);
   deployCards(player);
 });
 
 }
 
 function deployCards(player) {
+
   $('<div id="row1">').appendTo('container');
   $('<div id="row2">').appendTo('container');
    if (player == 1) {
@@ -97,7 +104,7 @@ function deployCards(player) {
 
 function selectCard(player) {
   if (player == 1){
-  $(`.0`).click(function() {
+  $(`#row2 .0`).click(function() {
     $('#row1 div').css('border', "0");
     playerCardPower = starkFamily[0].power;
     playerCardDef = starkFamily[0].def;
@@ -108,7 +115,7 @@ function selectCard(player) {
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef,
       cpuCard, playerCard,rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3 )
   })
-  $(`.1`).click(function() {
+  $(`#row2 .1`).click(function() {
     $('#row1 div').css('border', "0");
     playerCardPower = starkFamily[1].power;
     playerCardDef = starkFamily[1].def;
@@ -120,7 +127,7 @@ function selectCard(player) {
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
       playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
   })
-  $(`.2`).click(function() {
+  $(`#row2 .2`).click(function() {
     $('#row1 div').css('border', "0");
      playerCardPower = starkFamily[2].power;
      playerCardDef = starkFamily[2].def;
@@ -133,7 +140,7 @@ function selectCard(player) {
       playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
   })
  } else {
-  $(`.0`).click(function() {
+  $(`#row2 .0`).click(function() {
     $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[0].power;
      playerCardDef = lannisterFamily[0].def;
@@ -144,7 +151,7 @@ function selectCard(player) {
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
-   $(`.1`).click(function() {
+   $(`#row2 .1`).click(function() {
     $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[1].power;
      playerCardDef = lannisterFamily[1].def;
@@ -155,7 +162,7 @@ function selectCard(player) {
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
-    $(`.2`).click(function() {
+    $(`#row2 .2`).click(function() {
     $('#row1 div').css('border', "0");
      playerCardPower = lannisterFamily[2].power;
      playerCardDef = lannisterFamily[2].def;
@@ -187,7 +194,6 @@ function cpuLannisterRandom(){
     cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
   }
   cpuCard = $('#row1 div')[rand];
-
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = lannisterFamily[rand].power;
   cpuCardDef = lannisterFamily[rand].def;
@@ -220,8 +226,13 @@ function cpuStarkRandom(){
 
 function cardComparing() {
   if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
-      $('<img src="./images/erase.png">').appendTo(playerCard); //add X image to lost cards
-      $('<img src="./images/erase.png">').appendTo(cpuCard);
+      var bannerText = document.getElementById('banner');
+      bannerText.innerHTML = "Your opponent is\n"+ cpuCard.id+"!"
+      $(bannerText).css('font-size', "100px");
+      setTimeout(function(){bannerText.innerHTML = ""}, 2000);
+      setTimeout(function(){$('<img src="./images/erase.png">').appendTo(playerCard)
+      $('<img src="./images/erase.png">').appendTo(cpuCard)}, 2500)
+      setTimeout(function(){alert("Both side's member got killed")}, 3000);
       $(playerCard).css('border', "0");  // deleted the hover effect from card
       if (rand == 0){
         cpuDeletedCard1 = 1
@@ -238,7 +249,12 @@ function cardComparing() {
         playerDeletedCard3 = 1;
       }
   } else if (playerCardPower >= cpuCardDef) {
-      $('<img src="./images/erase.png">').appendTo(cpuCard);
+      var bannerText = document.getElementById('banner');
+      bannerText.innerHTML = "Your opponent is\n"+ cpuCard.id+"!"
+      $(bannerText).css('font-size', "100px");
+      setTimeout(function(){bannerText.innerHTML = ""}, 2000);
+      setTimeout(function(){$('<img src="./images/erase.png">').appendTo(cpuCard)}, 2500);
+      setTimeout(function(){alert("You won this fight")}, 3000);
        if (rand == 0){
         cpuDeletedCard1 = 1
       } else if (rand == 1){
@@ -247,7 +263,12 @@ function cardComparing() {
         cpuDeletedCard3 = 1;
       }
   } else if (cpuCardPower >= playerCardDef) {
-      $('<img src="./images/erase.png">').appendTo(playerCard);
+      var bannerText = document.getElementById('banner');
+      bannerText.innerHTML = "Your opponent is\n"+ cpuCard.id+"!"
+      $(bannerText).css('font-size', "100px");
+      setTimeout(function(){bannerText.innerHTML = ""}, 2000);
+      setTimeout(function(){$('<img src="./images/erase.png">').appendTo(playerCard)}, 2500);
+      setTimeout(function(){alert("You lost this fight")}, 3000);
       $(playerCard).css('border', "0");
         if (selection == 0){
         playerDeletedCard1 = 1;
@@ -259,18 +280,30 @@ function cardComparing() {
       console.log(playerCard);
       console.log(cpuCard);
   } else {
-      alert("Draw! Select another card to combat");
+      alert("Draw! Select another card to fight");
   }
-  winCheck();
+  setTimeout(function(){winCheck()}, 3500);
 }
 
 function winCheck() {
-  if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1){
-    alert("Congradulation!! Your family win the thrones\nRematch?");
-    window.location.reload(true);
+  if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1 &&
+    playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1) {
+    var bannerText = document.getElementById('banner');
+    bannerText.innerHTML = "Tie Game!"
+    $(bannerText).css('font-size', "150px")
+    setTimeout(function(){alert("But at leasst Westeros get the peace\nRematch?")}, 1500);
+    alert("But at leasst Westeros get the peace\nRematch?")
+  }
+  else if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1){
+    var bannerText = document.getElementById('banner');
+    bannerText.innerHTML = "You Win!"
+     $(bannerText).css('font-size', "150px")
+    setTimeout(function(){alert("Congradulation!! Your family win the thrones\nRematch?")}, 1500);
   } else if (playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1){
-    alert("Your family lost this battle\nRematch?" );
-    window.location.reload(true);
+    var bannerText = document.getElementById('banner');
+    bannerText.innerHTML = "You Lose!"
+    $(bannerText).css('font-size', "150px")
+    setTimeout(function(){alert("Your family lost this battle\nRematch?" )}, 1500);
   }
 }
 
