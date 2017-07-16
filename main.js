@@ -1,20 +1,22 @@
 // Create the cards
-function card(family, name, power, def) {
+function card(family, name, power, def, dead) {
   this.family = family;
   this.name = name;
   this.power = power;
   this.def = def;
+  this.dead = dead
 }
 
-var jonSnow = new card("stark", "JonSnow", 80, 75);
-var aryaStark = new card("stark", "AryaStark", 85, 40);
-var sansaStark = new card("stark", "SansaStark", 50, 40);
-var cerseiLannister = new card("lannister", "CerseiLannister", 40, 70);
-var jaimeLannister = new card("lannister", "JaimeLannister", 75, 85);
-var tyrionLannister = new card("lannister", "TyrionLannister", 50, 50);
-
+var jonSnow = new card("stark", "JonSnow", 80, 75, false);
+var aryaStark = new card("stark", "AryaStark", 85, 40, false);
+var sansaStark = new card("stark", "SansaStark", 50, 40, false);
+var cerseiLannister = new card("lannister", "CerseiLannister", 40, 70, false);
+var jaimeLannister = new card("lannister", "JaimeLannister", 75, 85, false);
+var tyrionLannister = new card("lannister", "TyrionLannister", 50, 50, false);
 var starkFamily =[jonSnow, aryaStark, sansaStark];
 var lannisterFamily =[cerseiLannister, jaimeLannister, tyrionLannister];
+
+// Declare global variables
 var player = 0;
 var playerCardPower = 0;
 var playerCardDef = 0;
@@ -22,6 +24,11 @@ var cpuCardPower = 0;
 var cpuCardDef = 0;
 var cpuCard;
 var playerCard;
+var rand = 0;
+var cpuDeletedCard1;
+var cpuDeletedCard2;
+var cpuDeletedCard3;
+
 
 // To load and start the game
 $('#startButton').click(function() {
@@ -37,7 +44,7 @@ $('#startButton').click(function() {
   playerChoice();
 });
 
-
+// Tap family to load the game screen and to know which side of cards need to be deployed
 function playerChoice() {
 $('#houseStark').click(function() {
   $('.familyDiv').remove();
@@ -65,19 +72,19 @@ function deployCards(player) {
       $('#row2').addClass('houseStark');
       $('#row1').addClass('houseLannister');
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row2');
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def} data-dead=${starkFamily[i].dead}>`).appendTo('#row2');
       }
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row1');
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def} data-dead=${lannisterFamily[i].dead}>`).appendTo('#row1');
     }
    } else {
       $('#row1').addClass('houseStark');
       $('#row2').addClass('houseLannister');
       for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row1');
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def} data-dead=${starkFamily[i].dead}>`).appendTo('#row1');
       }
        for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row2');
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def} data-dead=${lannisterFamily[i].dead}>`).appendTo('#row2');
     }
    }
       selectCard(player);
@@ -90,10 +97,10 @@ function selectCard(player) {
     playerCardPower = starkFamily[0].power;
     playerCardDef = starkFamily[0].def;
     playerCard = $('#row2 div')[0];
-    console.log(playerCardPower);
-    console.log(playerCardDef);
-    cpuLannisterRandom()
-    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+    console.log("cpuDeletedCard1 is" + cpuDeletedCard1 + "cpuDeletedCard2 is" + cpuDeletedCard2 );
+    cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
+    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef,
+      cpuCard, playerCard,rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3 )
   })
   $(`.1`).click(function() {
     $('#row1 div').css('border', "0");
@@ -102,8 +109,9 @@ function selectCard(player) {
     playerCard = $('#row2 div')[1];
     console.log(playerCardPower);
     console.log(playerCardDef);
-    cpuLannisterRandom()
-    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+    cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
+    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
+      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
   })
   $(`.2`).click(function() {
     $('#row1 div').css('border', "0");
@@ -112,8 +120,9 @@ function selectCard(player) {
      playerCard = $('#row2 div')[2];
      console.log(playerCardPower);
      console.log(playerCardDef);
-     cpuLannisterRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
+      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
   })
  } else {
   $(`.0`).click(function() {
@@ -124,7 +133,7 @@ function selectCard(player) {
      console.log(playerCardPower);
      console.log(playerCardDef);
      cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
    $(`.1`).click(function() {
     $('#row1 div').css('border', "0");
@@ -133,8 +142,8 @@ function selectCard(player) {
      playerCard = $('#row2 div')[1];
      console.log(playerCardPower);
      console.log(playerCardDef);
-     cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+     cpuStarkRandom(cpuDeletedCard)
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
     $(`.2`).click(function() {
     $('#row1 div').css('border', "0");
@@ -143,18 +152,31 @@ function selectCard(player) {
      playerCard = $('#row2 div')[2];
      console.log(playerCardPower);
      console.log(playerCardDef);
-     cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard)
+     cpuStarkRandom(cpuDeletedCard)
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
 }
 }
 
 function cpuLannisterRandom(){
   var arr = [1, 2, 3];
-  var rand = Math.random();
+  rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
+  console.log("rand is" + rand +"and" + "cpuDeletedCard1 is" + cpuDeletedCard1 +" " + "cpuDeletedCard2 is" + " "+ cpuDeletedCard2
+   + "cpuDeletedCard3 is" + cpuDeletedCard3 )
+  if (rand == 0 && cpuDeletedCard1 == 1){
+     console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  } else if (rand == 1 && cpuDeletedCard2 == 1){
+    console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  } else if (rand == 2 && cpuDeletedCard3 == 1){
+    console.log("run through here")
+    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+  }
   cpuCard = $('#row1 div')[rand];
+
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = lannisterFamily[rand].power;
   cpuCardDef = lannisterFamily[rand].def;
@@ -164,7 +186,7 @@ function cpuLannisterRandom(){
 
 function cpuStarkRandom(){
   var arr = [1, 2, 3];
-  var rand = Math.random();
+  rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
   cpuCard = $('#row1 div')[rand];
@@ -175,27 +197,46 @@ function cpuStarkRandom(){
   console.log(cpuCardDef);
 }
 
-function cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard) {
+function cardComparing() {
   if (playerCardPower >= cpuCardDef && cpuCardPower >= playerCardDef) {
       $('<img src="./images/erase.png">').appendTo(playerCard);
       $('<img src="./images/erase.png">').appendTo(cpuCard);
-      console.log('run through here');
-      playerCard.dataset.die = true;
-      cpuCard.dataset.die = true;
       $(playerCard).css('border', "0");
+      console.log("rand is" + rand);
+      if (rand == 0){
+        cpuDeletedCard1 = 1
+        console.log("cpuDeletedCard1 is" + cpuDeletedCard1)
+
+      } else if (rand == 1){
+        cpuDeletedCard2 = 1;
+        console.log("cpuDeletedCard2 is" + cpuDeletedCard2)
+
+      }else {
+        cpuDeletedCard3 = 1;
+        console.log("cpuDeletedCard3 is" + cpuDeletedCard3)
+
+      }
   } else if (playerCardPower >= cpuCardDef) {
       $('<img src="./images/erase.png">').appendTo(cpuCard);
-      cpuCard.dataset.die = true;
-      console.log(playerCard);
-      console.log(cpuCard)
-      console.log('run through here');
+       if (rand == 0){
+        cpuDeletedCard1 = 1
+        console.log("cpuDeletedCard1 is" + cpuDeletedCard1)
+
+      } else if (rand == 1){
+        cpuDeletedCard2 = 1;
+        console.log("cpuDeletedCard2 is" + cpuDeletedCard2)
+
+      }else {
+        cpuDeletedCard3 = 1;
+        console.log("cpuDeletedCard3 is" + cpuDeletedCard3)
+
+      }
+        console.log("rand is" + rand);
   } else if (cpuCardPower >= playerCardDef) {
       $('<img src="./images/erase.png">').appendTo(playerCard);
       $(playerCard).css('border', "0");
-      playerCard.dataset.die = true;
       console.log(playerCard);
       console.log(cpuCard);
-      console.log('run through here');
   } else {
       alert("Draw! Select another game to combat");
   }

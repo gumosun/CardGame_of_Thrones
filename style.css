@@ -135,12 +135,7 @@ container {
   border: 5px solid #D4AF37;
 }
 
-#erase {
-  height:50%;
-  width:50%;
-  background-image: url(./images/erase.png);
-  background-size: contain;
-}
+
 
 
 font-family: 'UnifrakturMaguntia', cursive;
