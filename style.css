@@ -95,55 +95,65 @@ container {
 #row1 {
   display: inline-block;
   height: 400px;
-  width: 850px;
+  width: 100%;
   margin: 0px 100px;
   z-index: 100;
+  padding: 0px 0px;
 }
 
 #row2 {
   display: inline-block;
   height: 400px;
-  width: 850px;
+  width: 1050px;
   margin: 0px 100px;
   z-index: 100;
+  padding: 0px 0px;
 }
 
 #row1 div {
   height: 330px;
   width: 213px;
   float: left;
-  margin: 5px 25px;
+  margin: 5px 20px;
 }
 
 #row2 div {
   height: 330px;
   width: 213px;
   float: left;
-  margin: 5px 25px;
+  margin: 5px 20px;
 }
 
 #JonSnow {
   background-image: url(./images/JonSnow.jpg);
 }
 
-#AryaStark {
+#Arya {
   background-image: url(./images/AryaStark.jpg);
 }
 
-#SansaStark {
+#Sansa {
   background-image: url(./images/SensaStark.jpg);
 }
 
-#CerseiLannister {
+#Cersei {
   background-image: url(./images/CerseiLannister.jpg);
 }
 
-#JaimeLannister {
+#Jaime {
   background-image: url(./images/JaimeLannister.jpg);
 }
 
-#TyrionLannister {
+#Tyrion {
   background-image: url(./images/TyrionLannister.jpg);
+}
+
+#Tywin {
+  background-image: url(./images/TywinLannister.jpg);
+}
+
+#Benjen {
+  background-image: url(./images/BenjenStark.jpg);
 }
 
 #row2 div:hover {

@@ -1,20 +1,21 @@
 // Create the cards
-function card(family, name, power, def, dead) {
+function card(family, name, power, def) {
   this.family = family;
   this.name = name;
   this.power = power;
   this.def = def;
-  this.dead = dead
 }
 
-var jonSnow = new card("stark", "JonSnow", 80, 75, false);
-var aryaStark = new card("stark", "AryaStark", 85, 40, false);
-var sansaStark = new card("stark", "SansaStark", 50, 45, false);
-var cerseiLannister = new card("lannister", "CerseiLannister", 40, 70, false);
-var jaimeLannister = new card("lannister", "JaimeLannister", 75, 85, false);
-var tyrionLannister = new card("lannister", "TyrionLannister", 50, 50, false);
-var starkFamily =[jonSnow, aryaStark, sansaStark];
-var lannisterFamily =[cerseiLannister, jaimeLannister, tyrionLannister];
+var jonSnow = new card("stark", "JonSnow", 80, 75);
+var aryaStark = new card("stark", "Arya", 85, 40);
+var sansaStark = new card("stark", "Sansa", 50, 40);
+var benjenStark = new card("stark", "Benjen", 75, 70)
+var cerseiLannister = new card("lannister", "Cersei", 80, 45 );
+var jaimeLannister = new card("lannister", "Jaime", 75, 80);
+var tyrionLannister = new card("lannister", "Tyrion", 50, 50);
+var tywinLannister = new card("lannister", "Tywin", 70, 75);
+var starkFamily =[jonSnow, aryaStark, sansaStark, benjenStark];
+var lannisterFamily =[cerseiLannister, jaimeLannister, tyrionLannister, tywinLannister];
 
 // Declare global variables
 var player = 0;
@@ -29,9 +30,11 @@ var rand = 0;
 var cpuDeletedCard1;
 var cpuDeletedCard2;
 var cpuDeletedCard3;
+var cpuDeletedCard4;
 var playerDeletedCard1;
 var playerDeletedCard2;
 var playerDeletedCard3;
+var playerDeletedCard4;
 
 
 
@@ -83,20 +86,20 @@ function deployCards(player) {
    if (player == 1) {
       $('#row2').addClass('houseStark');
       $('#row1').addClass('houseLannister');
-       for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def} data-dead=${starkFamily[i].dead}>`).appendTo('#row2');
+       for (let i=0 ; i<4; i++) {
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row2');
       }
-       for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def} data-dead=${lannisterFamily[i].dead}>`).appendTo('#row1');
+       for (let i=0 ; i<4; i++) {
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row1');
     }
    } else {
       $('#row1').addClass('houseStark');
       $('#row2').addClass('houseLannister');
-      for (let i=0 ; i<3; i++) {
-        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def} data-dead=${starkFamily[i].dead}>`).appendTo('#row1');
+      for (let i=0 ; i<4; i++) {
+        $(`<div id="${starkFamily[i].name}" class=${i} data-power=${starkFamily[i].power} data-def=${starkFamily[i].def}>`).appendTo('#row1');
       }
-       for (let i=0 ; i<3; i++) {
-        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def} data-dead=${lannisterFamily[i].dead}>`).appendTo('#row2');
+       for (let i=0 ; i<4; i++) {
+        $(`<div id="${lannisterFamily[i].name}" class=${i} data-power=${lannisterFamily[i].power} data-def=${lannisterFamily[i].def}>`).appendTo('#row2');
     }
    }
       selectCard(player);
@@ -110,7 +113,6 @@ function selectCard(player) {
     playerCardDef = starkFamily[0].def;
     playerCard = $('#row2 div')[0];
     selection = 0;
-    console.log("cpuDeletedCard1 is" + cpuDeletedCard1 + "cpuDeletedCard2 is" + cpuDeletedCard2 );
     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef,
       cpuCard, playerCard,rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3 )
@@ -133,6 +135,18 @@ function selectCard(player) {
      playerCardDef = starkFamily[2].def;
      playerCard = $('#row2 div')[2];
      selection = 2;
+     console.log(playerCardPower);
+     console.log(playerCardDef);
+     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
+      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
+  })
+  $(`#row2 .3`).click(function() {
+    $('#row1 div').css('border', "0");
+     playerCardPower = starkFamily[3].power;
+     playerCardDef = starkFamily[3].def;
+     playerCard = $('#row2 div')[3];
+     selection = 3;
      console.log(playerCardPower);
      console.log(playerCardDef);
      cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
@@ -173,11 +187,22 @@ function selectCard(player) {
      cpuStarkRandom()
      cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
   })
+    $(`#row2 .3`).click(function() {
+    $('#row1 div').css('border', "0");
+     playerCardPower = lannisterFamily[3].power;
+     playerCardDef = lannisterFamily[3].def;
+     playerCard = $('#row2 div')[3];
+     selection = 3;
+     console.log(playerCardPower);
+     console.log(playerCardDef);
+     cpuStarkRandom()
+     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
+  })
 }
 }
 
 function cpuLannisterRandom(){
-  var arr = [1, 2, 3];
+  var arr = [1, 2, 3, 4];
   rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
@@ -185,43 +210,43 @@ function cpuLannisterRandom(){
    + "cpuDeletedCard3 is" + cpuDeletedCard3 )
   if (rand == 0 && cpuDeletedCard1 == 1){
      console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
   } else if (rand == 1 && cpuDeletedCard2 == 1){
     console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
   } else if (rand == 2 && cpuDeletedCard3 == 1){
     console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
+  } else if (rand == 3 && cpuDeletedCard4 == 1){
+    cpuLannisterRandom()
   }
   cpuCard = $('#row1 div')[rand];
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = lannisterFamily[rand].power;
   cpuCardDef = lannisterFamily[rand].def;
-  console.log(cpuCardPower);
-  console.log(cpuCardDef);
 }
 
 function cpuStarkRandom(){
-  var arr = [1, 2, 3];
+  var arr = [1, 2, 3, 4];
   rand = Math.random();
   rand *= arr.length;
   rand = Math.floor(rand);
   if (rand == 0 && cpuDeletedCard1 == 1){
      console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
   } else if (rand == 1 && cpuDeletedCard2 == 1){
     console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
   } else if (rand == 2 && cpuDeletedCard3 == 1){
     console.log("run through here")
-    cpuLannisterRandom(cpuDeletedCard1, cpuDeletedCard2,cpuDeletedCard3)
+    cpuLannisterRandom()
+  } else if (rand == 3 && cpuDeletedCard4 == 1){
+    cpuLannisterRandom()
   }
   cpuCard = $('#row1 div')[rand];
   $(cpuCard).css('border', "10px solid red");
   cpuCardPower = starkFamily[rand].power;
   cpuCardDef = starkFamily[rand].def;
-  console.log(cpuCardPower);
-  console.log(cpuCardDef);
 }
 
 function cardComparing() {
@@ -238,15 +263,19 @@ function cardComparing() {
         cpuDeletedCard1 = 1
       } else if (rand == 1){
         cpuDeletedCard2 = 1;
-      }else {
+      }else if (rand == 2){
         cpuDeletedCard3 = 1;
+      } else {
+        cpuDeletedCard4 = 1;
       }
       if (selection == 0){
         playerDeletedCard1 = 1;
       } else if (selection ==1){
         playerDeletedCard2 = 1;
-      } else {
+      } else if (selection ==2){
         playerDeletedCard3 = 1;
+      }else {
+        playerDeletedCard4 =1;
       }
   } else if (playerCardPower >= cpuCardDef) {
       var bannerText = document.getElementById('banner');
@@ -259,8 +288,10 @@ function cardComparing() {
         cpuDeletedCard1 = 1
       } else if (rand == 1){
         cpuDeletedCard2 = 1;
-      }else {
+      }else if (rand == 2){
         cpuDeletedCard3 = 1;
+      } else {
+        cpuDeletedCard4 = 1;
       }
   } else if (cpuCardPower >= playerCardDef) {
       var bannerText = document.getElementById('banner');
@@ -274,11 +305,11 @@ function cardComparing() {
         playerDeletedCard1 = 1;
       } else if (selection ==1){
         playerDeletedCard2 = 1;
-      } else {
+      } else if (selection ==2){
         playerDeletedCard3 = 1;
+      } else {
+        playerDeletedCard4 = 1;
       }
-      console.log(playerCard);
-      console.log(cpuCard);
   } else {
       alert("Draw! Select another card to fight");
   }
@@ -286,24 +317,26 @@ function cardComparing() {
 }
 
 function winCheck() {
-  if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1 &&
-    playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1) {
+  if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1 && cpuDeletedCard4 ==1 &&
+    playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1 && playerDeletedCard4 ==1) {
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "Tie Game!"
     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){alert("But at leasst Westeros get the peace\nRematch?")}, 1500);
-    alert("But at leasst Westeros get the peace\nRematch?")
+    setTimeout(function(){alert("But at leasst Westeros get the peace\nRematch?")}, 2300);
+    setTimeout(function(){window.location.reload(true)}, 2300);
   }
-  else if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1){
+  else if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1 && cpuDeletedCard4 ==1){
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "You Win!"
-     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){alert("Congradulation!! Your family win the thrones\nRematch?")}, 1500);
-  } else if (playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1){
+    $(bannerText).css('font-size', "150px")
+    setTimeout(function(){alert("Congradulation!! Your family win the thrones\nRematch?")}, 2300);
+    setTimeout(function(){window.location.reload(true)}, 2300);
+  } else if (playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1 && playerDeletedCard4 ==1){
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "You Lose!"
     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){alert("Your family lost this battle\nRematch?" )}, 1500);
+    setTimeout(function(){window.location.reload(true)}, 2300);
+    setTimeout(function(){alert("Your family lost this battle\nRematch?" )}, 2300);
   }
 }
 
