@@ -1,14 +1,12 @@
-# First_Game_Project
-
 ** This game is only for education purpose 
 
-## [CardGame of Thrones]
+# [CardGame of Thrones]
 
 ### Technologies used
-1.Javascript
-1.jQuery
-1.CSS
-1.HTML
+1. Javascript
+1. jQuery
+1. CSS
+1. HTML
 
 
 
@@ -18,12 +16,12 @@
 
 
 ### How-to-play 
-1.Select your favorite family
-2.Each side has 4 different stats cards
-3.Left number is attack power and right is defense
-4.If your attack power is equal or greater than opponent's defense, you can beat it.
+1. Select your favorite family
+1. Each side has 4 different stats cards
+1. Left number is attack power and right is defense
+1. If your attack power is equal or greater than opponent's defense, you can beat it.
 
 
 ### Future Improvements
-1.Cards deck
-2.Special ability
+1. Cards deck
+1. Special ability
