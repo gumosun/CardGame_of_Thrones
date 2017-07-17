@@ -113,9 +113,8 @@ function selectCard(player) {
     playerCardDef = starkFamily[0].def;
     playerCard = $('#row2 div')[0];
     selection = 0;
-    cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
-    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef,
-      cpuCard, playerCard,rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3 )
+    cpuLannisterRandom()
+    cardComparing()
   })
   $(`#row2 .1`).click(function() {
     $('#row1 div').css('border', "0");
@@ -123,11 +122,8 @@ function selectCard(player) {
     playerCardDef = starkFamily[1].def;
     playerCard = $('#row2 div')[1];
     selection = 1;
-    console.log(playerCardPower);
-    console.log(playerCardDef);
-    cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
-    cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
-      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
+    cpuLannisterRandom()
+    cardComparing()
   })
   $(`#row2 .2`).click(function() {
     $('#row1 div').css('border', "0");
@@ -135,11 +131,8 @@ function selectCard(player) {
      playerCardDef = starkFamily[2].def;
      playerCard = $('#row2 div')[2];
      selection = 2;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
-     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
-      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
+     cpuLannisterRandom()
+     cardComparing()
   })
   $(`#row2 .3`).click(function() {
     $('#row1 div').css('border', "0");
@@ -147,11 +140,8 @@ function selectCard(player) {
      playerCardDef = starkFamily[3].def;
      playerCard = $('#row2 div')[3];
      selection = 3;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
-     cpuLannisterRandom(cpuDeletedCard1,cpuDeletedCard2,cpuDeletedCard3)
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard,
-      playerCard, rand, cpuDeletedCard1, cpuDeletedCard2, cpuDeletedCard3)
+     cpuLannisterRandom()
+     cardComparing()
   })
  } else {
   $(`#row2 .0`).click(function() {
@@ -160,10 +150,8 @@ function selectCard(player) {
      playerCardDef = lannisterFamily[0].def;
      playerCard = $('#row2 div')[0];
      selection = 0;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
      cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
+     cardComparing()
   })
    $(`#row2 .1`).click(function() {
     $('#row1 div').css('border', "0");
@@ -171,10 +159,8 @@ function selectCard(player) {
      playerCardDef = lannisterFamily[1].def;
      playerCard = $('#row2 div')[1];
      selection = 1;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
      cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
+     cardComparing()
   })
     $(`#row2 .2`).click(function() {
     $('#row1 div').css('border', "0");
@@ -182,10 +168,8 @@ function selectCard(player) {
      playerCardDef = lannisterFamily[2].def;
      playerCard = $('#row2 div')[2];
      selection = 2;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
      cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
+     cardComparing()
   })
     $(`#row2 .3`).click(function() {
     $('#row1 div').css('border', "0");
@@ -193,10 +177,8 @@ function selectCard(player) {
      playerCardDef = lannisterFamily[3].def;
      playerCard = $('#row2 div')[3];
      selection = 3;
-     console.log(playerCardPower);
-     console.log(playerCardDef);
      cpuStarkRandom()
-     cardComparing(playerCardPower, playerCardDef, cpuCardPower, cpuCardDef, cpuCard, playerCard, rand)
+     cardComparing()
   })
 }
 }
@@ -322,21 +304,21 @@ function winCheck() {
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "Tie Game!"
     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){alert("But at leasst Westeros get the peace\nRematch?")}, 2300);
-    setTimeout(function(){window.location.reload(true)}, 2300);
+    setTimeout(function(){alert("But at leasst Westeros get the peace\nRematch?")}, 1500);
+    setTimeout(function(){window.location.reload(true)}, 1500);
   }
   else if (cpuDeletedCard1 == 1 && cpuDeletedCard2 == 1 && cpuDeletedCard3 ==1 && cpuDeletedCard4 ==1){
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "You Win!"
     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){alert("Congradulation!! Your family win the thrones\nRematch?")}, 2300);
-    setTimeout(function(){window.location.reload(true)}, 2300);
+    setTimeout(function(){alert("Congradulation!! Your family win the thrones\nRematch?")}, 1500);
+    setTimeout(function(){window.location.reload(true)}, 1500);
   } else if (playerDeletedCard1 == 1 && playerDeletedCard2 == 1 && playerDeletedCard3 ==1 && playerDeletedCard4 ==1){
     var bannerText = document.getElementById('banner');
     bannerText.innerHTML = "You Lose!"
     $(bannerText).css('font-size', "150px")
-    setTimeout(function(){window.location.reload(true)}, 2300);
-    setTimeout(function(){alert("Your family lost this battle\nRematch?" )}, 2300);
+    setTimeout(function(){window.location.reload(true)}, 1500);
+    setTimeout(function(){alert("Your family lost this battle\nRematch?" )}, 1500);
   }
 }
 
